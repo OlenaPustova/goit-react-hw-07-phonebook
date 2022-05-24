@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/phonebook-actions';
+import { removeContact } from 'redux/phonebook/phonebook-operations';
 import s from './ContactListItem.module.scss';
 
 function ContactListItem({ name, number, id }) {
   const dispatch = useDispatch();
 
-  const onDeleteContact = () => dispatch(deleteContact(id));
+  const onDeleteContact = () => dispatch(removeContact(id));
 
   return (
     <li className={s.item}>

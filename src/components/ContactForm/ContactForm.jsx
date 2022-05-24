@@ -1,14 +1,15 @@
 import s from './ContactForm.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/phonebook-actions';
+import { addContact } from 'redux/phonebook/phonebook-operations';
 import { useForm } from 'hooks/useForm';
 import { memo } from 'react';
+import { getContactsSelector } from 'redux/phonebook/phonebook-selectors';
 
 function ContactForm() {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.items);
+  const contacts = useSelector(getContactsSelector);
 
-  const { form, handleChange, handleSubmit } = useForm({
+  const { form, reset, handleChange, handleSubmit } = useForm({
     initialValues: {
       name: '',
       number: '',
@@ -24,6 +25,7 @@ function ContactForm() {
         );
       }
       dispatch(addContact(formValues));
+      reset();
     },
   });
   const { name, number } = form;
